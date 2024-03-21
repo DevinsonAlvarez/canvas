@@ -1,19 +1,25 @@
 import Circle from '../shapes/Circle.js';
-import { Base } from '../theme.js';
+import { colors as themeColors } from '../theme.js';
 import { getDistance, numBetween } from '../utils.js';
-import { colors } from './options.js';
 
 /**
  * @param {HTMLCanvasElement} canvas
  */
-function drawOnCanvas(canvas) {
+function createBouncingBalls(canvas) {
   const context = canvas.getContext('2d');
+
+  const colorRegex = /([a-zA-Z].*\s[0-9])|base|mantle|crust/;
+
+  const colors = Object.values(themeColors)
+    .filter((color) => !colorRegex.test(color.name))
+    .map((color) => '#'.concat(color.hex));
 
   const balls = [];
 
   let colorIndex = 0;
 
   for (let i = 0; i < 14; i++) {
+    // Generating a random 1 or -1
     const sign = Math.round(Math.random()) * 2 - 1;
 
     let vx = Math.random() * 3 * sign;
@@ -41,8 +47,8 @@ function drawOnCanvas(canvas) {
     colorIndex + 1 >= colors.length - 1 ? (colorIndex = 0) : colorIndex++;
   }
 
-  return function render() {
-    context.fillStyle = `#${Base.hex}`;
+  function render() {
+    context.fillStyle = '#'.concat(themeColors.base.hex);
     context.fillRect(0, 0, canvas.width, canvas.height);
 
     balls.forEach((ball) => {
@@ -61,7 +67,11 @@ function drawOnCanvas(canvas) {
     });
 
     window.requestAnimationFrame(render);
+  }
+
+  return {
+    render,
   };
 }
 
-export default { drawOnCanvas };
+export { createBouncingBalls };
