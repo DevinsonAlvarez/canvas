@@ -4,17 +4,17 @@ class Circle {
    * @param {number} y
    * @param {object} options
    */
-  constructor(x, y, options) {
+  constructor({ x = 0, y = 0, radius = 10, color, vx = 0, vy = 0, context }) {
     this.x = x;
     this.y = y;
-    this.radius = options?.radius ?? 10;
+    this.radius = radius;
 
-    this.context = options?.context;
+    this.context = context;
 
-    this.color = options?.color ?? '#fff';
+    this.color = color ?? '#f00';
 
-    this.vx = options?.vx;
-    this.vy = options?.vy;
+    this.vx = vx;
+    this.vy = vy;
   }
 
   /**

@@ -3,17 +3,55 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <title>Canvas</title>
-    <style>
-      #canvas {
-        position: absolute;
-        top: 0;
-        left: 0;
-      }
-    </style>
   </head>
   <body>
     <canvas id="canvas"></canvas>
+    <header class="main-header">
+      <div class="option-container">
+        <button type="button" title="Show Options" class="option-button" id="option-button">
+          <!-- Heroicons: adjustments-vertical -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="option-button__icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5"
+            />
+          </svg>
+        </button>
+        <dialog class="option-dialog" id="option-dialog">
+          <h5 class="option-title">Options</h5>
+          <ul class="option-list">
+            <li class="option-item">opt 1</li>
+            <li class="option-item">opt 2</li>
+            <li class="option-item">opt 3</li>
+            <li class="option-item">opt 4</li>
+          </ul>
+        </dialog>
+      </div>
+    </header>
     <script type="module" src="main.js"></script>
+    <script type="module">
+      const $optionButton = document.getElementById('option-button');
+      const $optionDialog = document.getElementById('option-dialog');
+
+      $optionDialog.show();
+      $optionButton.addEventListener('click', () => {
+        if ($optionDialog.hasAttribute('open')) {
+          $optionDialog.close();
+        } else {
+          $optionDialog.show();
+        }
+      });
+    </script>
+    <footer></footer>
   </body>
 </html>

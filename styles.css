@@ -1,0 +1,170 @@
+:root {
+  --color-pink: #f5c2e7;
+  --color-mauve: #cba6f7;
+  --color-lavender: #b4befe;
+  --color-text: #cdd6f4;
+  --color-inverted-text: var(--color-crust);
+  --color-surface-0: #313244;
+  --color-surface-1: #45475a;
+  --color-base: #1e1e2e;
+  --color-mantle: #181825;
+  --color-crust: #11111b;
+
+  --base-unit: 1em;
+
+  --space-xxs: calc(0.25 * var(--base-unit));
+  --space-xs: calc(0.5 * var(--base-unit));
+  --space-sm: calc(0.75 * var(--base-unit));
+  --space-md: calc(1.25 * var(--base-unit));
+  --space-lg: calc(2 * var(--base-unit));
+  --space-xl: calc(3.25 * var(--base-unit));
+  --space-xxl: calc(5.25 * var(--base-unit));
+
+  --rounded-sm: 3px;
+  --rounded-md: 6px;
+  --rounded-lg: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  outline-offset: 2px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  font-family: sans-serif;
+  min-height: 100vh;
+  color: var(--color-text);
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2rem;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  pointer-events: none;
+}
+
+#canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  z-index: -10;
+}
+
+.main-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: var(--space-xs);
+}
+
+.option-container {
+  position: relative;
+}
+
+.option-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  padding: 0.4rem;
+  color: var(--color-text);
+  border-radius: var(--rounded-md);
+  background-color: var(--color-surface-0);
+  transition: background-color 200ms ease-in-out, color 200ms ease-in-out;
+}
+
+.option-button:hover {
+  background-color: var(--color-mauve);
+  color: var(--color-inverted-text);
+}
+
+.option-button:active {
+  background-color: var(--color-mauve);
+}
+
+.option-button:focus-visible {
+  outline: 2px solid var(--color-mauve);
+}
+
+.option-button__icon {
+  color: inherit;
+  height: 1.8rem;
+  width: 1.8rem;
+}
+
+.option-dialog {
+  min-height: 40px;
+  padding: 0;
+  width: 15rem;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: -199px;
+  border: none;
+  border-radius: var(--rounded-md);
+  background-color: var(--color-surface-0);
+  opacity: 0;
+  transition: opacity 200ms allow-discrete;
+  overflow: hidden;
+}
+
+.option-dialog[open] {
+  opacity: 1;
+}
+
+.option-dialog[open]:focus-visible {
+  outline: 2px solid var(--color-mauve);
+}
+
+@starting-style {
+  .option-dialog[open] {
+    opacity: 0;
+  }
+}
+
+.option-list {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  color: var(--color-text);
+}
+
+.option-dialog .option-title {
+  padding: 0.5rem;
+  font-size: 1.2em;
+  margin: 0;
+  padding: var(--space-xs) var(--space-xxs);
+  color: var(--color-text);
+}
+
+.option-list .option-item {
+  padding: var(--space-xs);
+  border-bottom: 1px solid var(--color-surface-1);
+}
+
+.option-list .option-item:first-child {
+  border-top: 1px solid var(--color-surface-1);
+}
+
+.option-list .option-item:last-child {
+  border-bottom: none;
+}
