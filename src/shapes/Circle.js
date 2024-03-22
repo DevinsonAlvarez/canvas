@@ -1,8 +1,6 @@
 class Circle {
   /**
-   * @param {number} x
-   * @param {number} y
-   * @param {object} options
+   * @param {{x: number, y: number, radius: number, color: number, vx: number, vy: number, context: CanvasRenderingContext2D }} params
    */
   constructor({
     x = 0,
