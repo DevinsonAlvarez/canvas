@@ -10,7 +10,12 @@
     <canvas id="canvas"></canvas>
     <header class="main-header">
       <div class="option-container">
-        <button type="button" title="Show Options" class="option-button" id="option-button">
+        <button
+          type="button"
+          title="Show Options"
+          class="option-button"
+          id="option-button"
+        >
           <!-- Heroicons: adjustments-vertical -->
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -30,8 +35,34 @@
         <dialog class="option-dialog" id="option-dialog">
           <h5 class="option-title">Options</h5>
           <ul class="option-list">
-            <li class="option-item">opt 1</li>
-            <li class="option-item">opt 2</li>
+            <li class="option-item">
+              <div class="option-item__wrapper">
+                <label for="add-ball-button" class="option-item__label"
+                  >Add Ball</label
+                >
+                <button
+                  type="button"
+                  id="add-ball-button"
+                  class="option-item__button"
+                >
+                  Add
+                </button>
+              </div>
+            </li>
+            <li class="option-item">
+              <div class="option-item__wrapper">
+                <label for="remove-ball-button" class="option-item__label"
+                  >Remove Ball</label
+                >
+                <button
+                  type="button"
+                  id="remove-ball-button"
+                  class="option-item__button"
+                >
+                  Remove
+                </button>
+              </div>
+            </li>
             <li class="option-item">opt 3</li>
             <li class="option-item">opt 4</li>
           </ul>

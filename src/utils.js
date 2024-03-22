@@ -22,3 +22,21 @@ export function getDistance(x1, y1, x2, y2) {
   const dy = y1 - y2;
   return Math.sqrt(dx * dx + dy * dy);
 }
+
+/**
+ * Returns a random element from the given object
+ *
+ * @param {Object|Array} obj
+ *
+ * @returns any
+ */
+export function getRandomItem(obj) {
+  if (Array.isArray(obj)) {
+    return obj[Math.floor(Math.random() * obj.length)];
+  }
+
+  if (typeof obj === 'object') {
+    const items = Object.values(obj);
+    return items[Math.floor(Math.random() * items.length)];
+  }
+}
