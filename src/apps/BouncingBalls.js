@@ -282,6 +282,11 @@ class BouncingBalls {
   clearCanvas() {
     this.#context.clearRect(0, 0, this.#canvas.width, this.#canvas.height);
   }
+
+  reset() {
+    this.#balls = [];
+    this.#wasRendered = false;
+  }
 }
 
 export { BouncingBalls };
