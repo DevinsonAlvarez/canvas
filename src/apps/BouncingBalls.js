@@ -62,6 +62,9 @@ function createBouncingBalls(canvas, options = {}) {
     balls.pop();
   }
 
+  let drawLines = options.drawLines;
+  let linesLength = options.linesLength;
+
   function render() {
     context.fillStyle = '#'.concat(themeColors.base.hex);
     context.fillRect(0, 0, canvas.width, canvas.height);
@@ -72,8 +75,8 @@ function createBouncingBalls(canvas, options = {}) {
 
         const d = getDistance(ball1.x, ball1.y, ball2.x, ball2.y);
 
-        if (options.drawLines) {
-          if (d < 100) {
+        if (drawLines) {
+          if (d < linesLength) {
             const gradient = context.createLinearGradient(
               ball1.x,
               ball1.y,
@@ -93,27 +96,53 @@ function createBouncingBalls(canvas, options = {}) {
         }
       });
 
-      if (
-        ball1.x + ball1.vx > canvas.width - ball1.radius ||
-        ball1.x + ball1.vx < ball1.radius
-      ) {
-        ball1.vx = -ball1.vx;
+      // infinite canvas x
+      // if (ball1.x >= canvas.width - ball1.radius || ball1.x <= ball1.radius) {
+      //   ball1.x = canvas.width - ball1.radius;
+      // }
+
+      // infinite canvas y
+      // if (ball1.y <= ball1.radius) {
+      //   ball1.y = canvas.height - ball1.radius;
+      // }
+
+      if (ball1.x >= canvas.width - ball1.radius) {
+        ball1.x = canvas.width - ball1.radius;
       }
 
-      if (
-        ball1.y + ball1.vy > canvas.height - ball1.radius ||
-        ball1.y + ball1.vy < ball1.radius
-      ) {
-        ball1.vy = -ball1.vy;
+      if (ball1.y >= canvas.height - ball1.radius) {
+        ball1.y = canvas.height - ball1.radius;
+      }
+
+      if (ball1.x <= ball1.radius) {
+        ball1.x = ball1.radius;
+      }
+
+      if (ball1.y <= ball1.radius) {
+        ball1.y = ball1.radius;
       }
 
       ball1.x += ball1.vx;
       ball1.y += ball1.vy;
 
+      if (
+        ball1.x - ball1.radius <= 0 ||
+        ball1.x >= canvas.width - ball1.radius
+      ) {
+        ball1.vx *= -1;
+      }
+
+      if (
+        ball1.y - ball1.radius <= 0 ||
+        ball1.y >= canvas.height - ball1.radius
+      ) {
+        ball1.vy *= -1;
+      }
+
       ball1.draw();
     });
 
-    window.requestAnimationFrame(render);
+    window.requestAnimationFrame(() => render());
   }
 
   return {
