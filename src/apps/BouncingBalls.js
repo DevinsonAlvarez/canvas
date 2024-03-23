@@ -78,7 +78,7 @@ class BouncingBalls {
   constructor(canvas) {
     this.#canvas = canvas;
     this.#context = canvas.getContext('2d');
-
+    this.hola = '';
     const colorRegex = /([a-zA-Z].*\s[0-9])|base|mantle|crust/;
 
     this.#colors = Object.values(themeColors).filter(
@@ -168,9 +168,8 @@ class BouncingBalls {
       this.#balls.forEach((ball2) => {
         if (ball1 === ball2) return;
 
-        const d = getDistance(ball1.x, ball1.y, ball2.x, ball2.y);
-
         if (this.#drawLines) {
+          const d = getDistance(ball1.x, ball1.y, ball2.x, ball2.y);
           if (d < this.#linesLength) {
             const gradient = this.#context.createLinearGradient(
               ball1.x,
@@ -286,6 +285,10 @@ class BouncingBalls {
   reset() {
     this.#balls = [];
     this.#wasRendered = false;
+  }
+
+  ballQuantity() {
+    return this.#balls.length;
   }
 }
 

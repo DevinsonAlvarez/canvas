@@ -37,6 +37,48 @@
           <ul class="option-list">
             <li class="option-item">
               <div class="option-item__wrapper">
+                <label for="ball-quantity-input" class="option-item__label"
+                  >Ball Quantity</label
+                >
+                <input
+                  type="number"
+                  id="ball-quantity-input"
+                  class="option-item__input"
+                  value="20"
+                />
+              </div>
+            </li>
+            <li class="option-item">
+              <div class="option-item__wrapper">
+                <label for="ball-radius-input" class="option-item__label"
+                  >Ball Radius</label
+                >
+                <input
+                  type="number"
+                  id="ball-radius-input"
+                  class="option-item__input"
+                  min="1"
+                  max="100"
+                  value="10"
+                  disabled
+                />
+              </div>
+            </li>
+            <li class="option-item">
+              <div class="option-item__wrapper">
+                <label for="random-ball-radius-input" class="option-item__label"
+                  >Random Radius</label
+                >
+                <input
+                  type="checkbox"
+                  id="random-ball-radius-input"
+                  class="option-item__input"
+                  checked
+                />
+              </div>
+            </li>
+            <li class="option-item">
+              <div class="option-item__wrapper">
                 <label class="option-item__label">Add Ball</label>
                 <button
                   type="button"
@@ -81,6 +123,12 @@
                 >
                   Reset
                 </button>
+              </div>
+            </li>
+            <li class="option-item">
+              <div class="option-item__wrapper">
+                <label class="option-item__label">FPS: </label>
+                <span id="fps-meter" class="option-item__text">0</span>
               </div>
             </li>
           </ul>
