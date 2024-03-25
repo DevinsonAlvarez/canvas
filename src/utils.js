@@ -40,3 +40,15 @@ export function getRandomItem(obj) {
     return items[Math.floor(Math.random() * items.length)];
   }
 }
+
+/**
+ * Sort hand for `document.querySelector`
+ *
+ * @param {string} selector
+ * @param {HTMLElement|undefined} selector
+ *
+ * @returns {Element|null}
+ */
+export function $(selector, context = document) {
+  return context.querySelector(selector);
+}

@@ -87,7 +87,7 @@ class BouncingBalls {
   }
 
   /**
-   * Sets the number of balls
+   * Sets the quantity of balls to create
    *
    * @param {number} value
    */
@@ -98,6 +98,8 @@ class BouncingBalls {
   }
 
   /**
+   * Sets the params used to create balls
+   *
    * @callback FactoryCallback
    * @returns {BallParams}
    *
@@ -110,7 +112,14 @@ class BouncingBalls {
   }
 
   /**
-   * @param {{ draw: boolean, width: number, length: number }} params
+   * Sets the parameters of the lines connecting the balls
+   *
+   * @typedef LinesParams
+   * @property {boolean} draw Weather lines should be displayed
+   * @property {boolean} width Line stroke width
+   * @property {boolean} length Max length of lines
+   *
+   * @param {LinesParams} params
    */
   lines({ draw = false, length = 100, width = 1 }) {
     this.#drawLines = draw;
@@ -121,6 +130,8 @@ class BouncingBalls {
   }
 
   /**
+   * Insert new ball on canvas
+   *
    * @param {BallParams|undefined} params
    */
   addBall(params) {
@@ -134,6 +145,11 @@ class BouncingBalls {
     return this;
   }
 
+  /**
+   * Remove last added ball from canvas
+   *
+   * @returns {BouncingBalls}
+   */
   removeBall() {
     this.#balls.pop();
 
@@ -155,6 +171,11 @@ class BouncingBalls {
     }
   }
 
+  /**
+   * Starts render loop
+   *
+   * @returns {BouncingBalls}
+   */
   render() {
     this.clearCanvas();
 
@@ -165,11 +186,12 @@ class BouncingBalls {
     }
 
     this.#balls.forEach((ball1) => {
-      this.#balls.forEach((ball2) => {
-        if (ball1 === ball2) return;
+      if (this.#drawLines) {
+        this.#balls.forEach((ball2) => {
+          if (ball1 === ball2) return;
 
-        if (this.#drawLines) {
           const d = getDistance(ball1.x, ball1.y, ball2.x, ball2.y);
+
           if (d < this.#linesLength) {
             const gradient = this.#context.createLinearGradient(
               ball1.x,
@@ -187,8 +209,8 @@ class BouncingBalls {
             this.#context.lineWidth = this.#linesWidth;
             this.#context.stroke();
           }
-        }
-      });
+        });
+      }
 
       // infinite canvas x
       // if (ball1.x >= canvas.width - ball1.radius || ball1.x <= ball1.radius) {
@@ -248,6 +270,8 @@ class BouncingBalls {
   }
 
   /**
+   * Set values to missing ball params
+   *
    * @param {BallParams} params
    *
    * @returns {BallParams}
@@ -266,6 +290,8 @@ class BouncingBalls {
   }
 
   /**
+   * Returns the next available color from the color list
+   *
    * @returns {{ name: string, hex: string, rgb: string, hsl: string }}
    */
   getNextColor() {
@@ -278,15 +304,26 @@ class BouncingBalls {
     return color;
   }
 
+  /**
+   * Clear the entire canvas
+   */
   clearCanvas() {
     this.#context.clearRect(0, 0, this.#canvas.width, this.#canvas.height);
   }
 
+  /**
+   * Force canvas to set a new state
+   */
   reset() {
     this.#balls = [];
     this.#wasRendered = false;
   }
 
+  /**
+   * Current number of balls
+   *
+   * @returns {number}
+   */
   ballQuantity() {
     return this.#balls.length;
   }
